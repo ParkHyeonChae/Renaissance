@@ -1,0 +1,14 @@
+{% extends "users/base.html" %}
+
+
+{% block contents %}
+
+{% if user.is_authenticated %}
+<button onclick="location.href='/users/main/'">마이프로필</button>
+<button onclick="location.href='/users/logout/'">로그아웃</button>
+{% else %}
+<button onclick="location.href='/users/login/'">로그인</button>
+<button onclick="location.href='/users/agreement/'">회원가입</button>
+{% endif %}
+
+{% endblock %}
