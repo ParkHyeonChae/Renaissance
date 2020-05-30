@@ -8,6 +8,12 @@ from django.utils.decorators import method_decorator
 from .decorators import login_message_required, admin_required, logout_message_required
 from django.views.generic import CreateView, FormView, TemplateView, View
 from .forms import RegisterForm, LoginForm
+from .models import User
+from django.http import HttpResponseRedirect, Http404
+from django.forms.utils import ErrorList
+from django.views.decorators.http import require_GET, require_POST
+from django.core.exceptions import PermissionDenied
+from django.urls import reverse_lazy, reverse
 
 
 # 메인화면
@@ -42,3 +48,44 @@ class LoginView(FormView):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+
+# 회원가입 약관동의
+@method_decorator(logout_message_required, name='dispatch')
+class AgreementView(View):
+    def get(self, request, *args, **kwargs):
+        request.session['agreement'] = False
+        return render(request, 'users/agreement.html')
+
+    def post(self, request, *args, **kwarg):
+        if request.POST.get('agreement1', False) and request.POST.get('agreement2', False):
+            request.session['agreement'] = True
+            return redirect('/users/register/')
+        else:
+            messages.info(request, "약관에 모두 동의해주세요.")
+            return render(request, 'users/agreement.html')
+
+
+# 회원가입 
+class RegisterView(CreateView):
+    model = User
+    template_name = 'users/register.html'
+    form_class = RegisterForm
+
+    def get(self, request, *args, **kwargs):
+        if not request.session.get('agreement', False):
+            raise PermissionDenied
+        request.session['agreement'] = False
+
+        url = settings.LOGIN_REDIRECT_URL
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(url)
+        return super().get(request, *args, **kwargs)
+
+    def get_success_url(self):
+        messages.success(self.request, "회원가입을 축하드립니다.")
+        return settings.LOGIN_URL
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return redirect(self.get_success_url())

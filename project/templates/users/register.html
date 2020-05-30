@@ -1,0 +1,290 @@
+{% extends "users/base.html" %}
+
+
+{% block contents %}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div style="position: absolute; top: 50%; height: 876.39px; margin-top: -438.195px;">
+            <div class="card" style="width: 40rem;">
+                <div class="card-body">
+                    <div class="text-center">
+                        <!-- <img src="" style="width: 30%; margin-top:10px; margin-bottom: -30px;"> -->
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <form action="" id="signup" method="POST" novalidate>
+                                {% csrf_token %}
+
+                                <!--아이디-->
+                                <div class="mb-4 md-form">
+                                    <label name="label_user_id" for="{{ form.user_id.id_for_label }}"><i
+                                            class="fas fa-user"></i>&nbsp;&nbsp;{{ form.user_id.label }}</label>
+                                    {{ form.user_id }}
+                                    <script type="text/javascript">
+                                        if (document.getElementsByName('user_id')[0].value != '') {
+                                            document.getElementsByName('label_user_id')[0].setAttribute('class',
+                                                'active');
+                                        }
+                                    </script>
+                                    {% if form.user_id.errors %}
+                                    <script type="text/javascript">
+                                        document.getElementsByName('user_id')[0].setAttribute('class',
+                                            'form-control is-invalid')
+                                    </script>
+                                    {% for error in form.user_id.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                    <small class="form-text text-muted">
+                                        로그인 시 사용할 아이디를 입력해주세요.
+                                    </small>
+                                </div>
+                                <!--비밀번호-->
+                                <div class="form-row">
+                                    <div class="col-md-6" style="margin-top:-25px; margin-bottom: -25px;">
+                                        <div class="mb-4 md-form">
+                                            <label name="label_password2" for="{{ form.password2.id_for_label }}"><i
+                                                    class="fas fa-unlock"></i>&nbsp;&nbsp;비밀번호</label>
+                                            {{ form.password2 }}
+                                            <script type="text/javascript">
+                                                if (document.getElementsByName('password2')[0].value != '') {
+                                                    document.getElementsByName('label_password2')[0].setAttribute('class', 'active');
+                                                }
+                                            </script>
+                                            {% if form.password2.errors %}
+                                            <script type="text/javascript">
+                                                document.getElementsByName('password2')[0].setAttribute('class',
+                                                    'form-control is-invalid')
+                                            </script>
+                                            {% for error in form.password2.errors %}
+                                            <div style="white-space: nowrap;" class="invalid-feedback">
+                                                {{ error }}
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!--비밀번호확인-->
+                                    <div class="col-md-6" style="margin-top:-25px; margin-bottom: -25px;">
+                                        <div class="mb-4 md-form">
+                                            <label name="label_password1" for="{{ form.password1.id_for_label }}"><i
+                                                    class="fas fa-unlock-alt"></i>&nbsp;&nbsp;비밀번호 확인</label>
+                                            {{ form.password1 }}
+                                            <script type="text/javascript">
+                                                if (document.getElementsByName('password1')[0].value != '') {
+                                                    document.getElementsByName('label_password1')[0].setAttribute('class','active');
+                                                }
+                                            </script>
+                                            {% if form.password1.errors %}
+                                            <script type="text/javascript">
+                                                document.getElementsByName('password1')[0].setAttribute('class',
+                                                    'form-control is-invalid')
+                                            </script>
+                                            {% for error in form.password1.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ error }}
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <small style="margin-left: 4px; margin-top:8px;" class="form-text text-muted">
+                                        최소 8개의 숫자와 문자 또는 특수기호를 입력해주세요. 일상적인 비밀번호는 사용할 수 없습니다.
+                                    </small>
+                                </div>
+                                <!--이메일-->
+                                <div class="mb-4 md-form">
+                                    <label name="label_email" for="{{ form.email.id_for_label }}"><i
+                                            class="fas fa-envelope"></i>&nbsp;&nbsp;{{ form.email.label }}</label>
+                                    {{ form.email }}
+                                    <script type="text/javascript">
+                                        if (document.getElementsByName('email')[0].value != '') {
+                                            document.getElementsByName('label_email')[0].setAttribute('class',
+                                                'active');
+                                        }
+                                    </script>
+                                    {% if form.email.errors %}
+                                    <script type="text/javascript">
+                                        document.getElementsByName('email')[0].setAttribute('class',
+                                            'form-control is-invalid')
+                                    </script>
+                                    {% for error in form.email.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                    <small class="form-text text-muted">
+                                        본인의 메일주소를 입력해주세요.
+                                    </small>
+                                </div>
+                                <!--이름-->
+                                <div class="mb-4 md-form">
+                                    <label name="label_name" for="{{ form.name.id_for_label }}"><i
+                                            class="fas fa-user-edit"></i>&nbsp;&nbsp;{{ form.name.label }}</label>
+                                    {{ form.name }}
+                                    <script type="text/javascript">
+                                        if (document.getElementsByName('name')[0].value != '') {
+                                            document.getElementsByName('label_name')[0].setAttribute('class', 'active');
+                                        }
+                                    </script>
+                                    {% if form.name.errors %}
+                                    <script type="text/javascript">
+                                        document.getElementsByName('name')[0].setAttribute('class',
+                                            'form-control is-invalid')
+                                    </script>
+                                    {% for error in form.name.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                    <small class="form-text text-muted">
+                                        이름 또는 활동명(가명)을 입력해주세요.
+                                    </small>
+                                </div>
+                                <!--휴대폰번호-->
+                                <div class="mb-4 md-form">
+                                    <label name="label_phone" for="{{ form.phone.id_for_label }}"><i
+                                            class="fas fa-phone"></i>&nbsp;&nbsp;{{ form.phone.label }}</label>
+                                    {{ form.phone }}
+                                    <script type="text/javascript">
+                                        if (document.getElementsByName('phone')[0].value != '') {
+                                            document.getElementsByName('label_phone')[0].setAttribute('class', 'active');
+                                        }
+                                    </script>
+                                    {% if form.phone.errors %}
+                                    <script type="text/javascript">
+                                        document.getElementsByName('phone')[0].setAttribute('class',
+                                            'form-control is-invalid')
+                                    </script>
+                                    {% for error in form.phone.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                    <small class="form-text text-muted">
+                                        하이픈(-)을 제외한 숫자로 입력해주세요.
+                                    </small>
+                                </div>
+                                <!--SNS아이디-->
+                                <div class="mb-4 md-form">
+                                    <label name="label_sns" for="{{ form.sns.id_for_label }}"><i
+                                            class="fas fa-address-card"></i>&nbsp;&nbsp;{{ form.sns.label }}</label>
+                                    {{ form.sns }}
+                                    <script type="text/javascript">
+                                        if (document.getElementsByName('sns')[0].value != '') {
+                                            document.getElementsByName('label_sns')[0].setAttribute('class',
+                                                'active');
+                                        }
+                                    </script>
+                                    {% if form.sns.errors %}
+                                    <script type="text/javascript">
+                                        document.getElementsByName('sns')[0].setAttribute('class',
+                                            'form-control is-invalid')
+                                    </script>
+                                    {% for error in form.sns.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ error }}
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                    <small class="form-text text-muted">
+                                        인스타그램, 페이스북 아이디의 DM 또는 메신저로 아티스트 인증을 진행합니다.
+                                    </small>
+                                </div>
+                                <!--거주지-->
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <label style="color:gray;" name="label_location" for="{{ form.location.id_for_label }}"><i
+                                                class="fas fa-address-card"></i>&nbsp;&nbsp;{{ form.location.label }}</label>
+                                        {{ form.location }}
+                                        <script type="text/javascript">
+                                            if (document.getElementsByName('location')[0].value != '') {
+                                                document.getElementsByName('label_location')[0].setAttribute('class',
+                                                    'active');
+                                            }
+                                        </script>
+                                        {% if form.location.errors %}
+                                        <script type="text/javascript">
+                                            document.getElementsByName('location')[0].setAttribute('class',
+                                                'form-control is-invalid')
+                                        </script>
+                                        {% for error in form.location.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <small class="form-text text-muted">
+                                        인스타그램, 페이스북 아이디의 DM 또는 메신저로 아티스트 인증을 진행합니다.
+                                    </small>
+                                </div>
+                                <br>
+                                <!--분야-->
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:gray;" name="label_genre"
+                                                for="{{ form.genre.id_for_label }}"><i
+                                                    class="fas fa-graduation-cap"></i>&nbsp;&nbsp;{{ form.genre.label }}</label>
+                                            {{ form.genre }}
+                                            <script type="text/javascript">
+                                                document.getElementsByTagName('option')[1].remove();
+                                            </script>
+                                            {% if form.genre.errors %}
+                                            <script type="text/javascript">
+                                                document.getElementsByName('genre')[0].setAttribute('class',
+                                                    'form-control is-invalid')
+                                            </script>
+                                            {% for error in form.genre.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ error }}
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!--세부분야-->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="color:gray;" name="label_position"
+                                                for="{{ form.position.id_for_label }}"><i
+                                                    class="fas fa-users"></i>&nbsp;&nbsp;{{ form.position.label }}</label>
+                                            {{ form.position }}
+
+                                            {% if form.position.errors %}
+                                            <script type="text/javascript">
+                                                document.getElementsByName('position')[0].setAttribute('class',
+                                                    'form-control is-invalid')
+                                            </script>
+                                            {% for error in form.position.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ error }}
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <small style="margin-left: 5px; margin-top:-10px;" class="form-text text-muted">
+                                        본인의 분야와, 세부분야를 선택해주세요.
+                                    </small>
+                                </div>
+
+                                <br>
+                                <button type="submit" style="opacity: 90%; font-size: 16px; margin-top: -5px;"
+                                    class="btn btn-dark btn-md btn-block">회원가입</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
