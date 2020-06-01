@@ -89,3 +89,8 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         return redirect(self.get_success_url())
+
+
+# 계정프로필
+def profile_view(request):
+    pass
